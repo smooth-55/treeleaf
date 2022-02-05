@@ -1,0 +1,58 @@
+{% extends 'base.html' %} {% load static %}
+{%block title%}Create Profile{%endblock%}
+
+{% block content %}
+
+   <div class="container"> 
+
+    <h3 class="text-center text-white fs-2 my-3">List of Profiles</h3>
+    <p class="text-center my-3"> <a href="{% url 'create' %}" class="text-info"> Click here to create a new profile</a></p>
+    <!-- <button type="button" class="btn btn-success" ><a href="{% url 'create' %}">Create Profile</a></button> -->
+<table class="table table-responsive my-5 ">
+    <thead>
+      <tr>
+        <th class="t_header text-center">S.N.</th>
+        <th class="t_header text-center">Full Name</th>
+        <th class="t_header text-center">Email</th>
+        <th class="t_header text-center">Skill</th>
+        <th class="t_header text-center">Proficiency Level</th>
+        <th class="t_header text-center">Photo</th>
+        <th class="t_header text-center">Action</th>
+     
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th class="t_body text-center">1</th>
+        <td class="t_body text-center" >Mark</td>
+        <td class="t_body text-center" >Otto</td>
+        <td class="t_body text-center" >@mdo</td>
+        <td class="t_body text-center" >@mdo</td>
+        <td class="table-image " >
+            <img src="https://images.unsplash.com/photo-1643976121436-6cf4d00c3296?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80" alt="" class="img-fluid">
+        </td>
+        <td class="t_body text-center"> 
+            <button class="btn btn-info text-white"> <a href="{% url 'update' %}"> Update </a></button>
+            <button class="btn btn-danger text-white"><a href="">Delete</a></button>
+        </td>
+      </tr>
+      <tr>
+        <th class="t_body text-center" >2</th>
+        <td class="t_body text-center" >Jacob</td>
+        <td class="t_body text-center" >Thornton</td>
+        <td class="t_body text-center" >@fat</td>
+        <td class="t_body text-center" >@fat</td>
+        <td class="table-image" >
+            <img src="{% static 'images/iot-world.svg' %}" alt="" class="img-fluid">
+        </td>
+        <td class="text-center">
+            <button class="btn btn-info text-white"> <a href="{% url 'update' %}"> Update </a></button>
+            <button class="btn btn-danger text-white"><a href="">Delete</a></button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+</div>
+{% endblock %}
