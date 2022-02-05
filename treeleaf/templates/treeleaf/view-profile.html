@@ -1,0 +1,138 @@
+{% extends 'base.html' %} {% load static %}
+{%block title%}Create Profile{%endblock%}
+{%block static%}
+
+{%endblock%}
+{% block content %}
+
+
+<!-- Main content -->
+<section class="container ">
+	<h6 class="my-3 text-info">Profile Information:</h6>
+	<div class="row">
+		<div class="col-lg-5">
+			<table class="view-table">
+				<tr>
+					<td class="text-light">Full Name:</td>
+					<th class="text-light">&nbsp;ashish dhakal</th>
+				</tr>
+
+				<tr>
+					<td class="text-light">Email:</td>
+					<th class="text-white "> &nbsp; aa@aa.com</th>
+				</tr>
+			</table>
+		</div>
+		<div class="col-lg-3 profile-img mb-5">
+
+			<img src="{% static 'images/iot-world.svg' %}" class="img-fluid" alt="">
+
+		</div>
+	</div>
+	<hr>
+	<div class="row ">
+		<div class="col-lg-5">
+			<button class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#skillModal">Add
+				skills</button>
+			<table class="table table-responsive">
+				<thead>
+					<tr>
+						<th class="t_header text-center">S.N.</th>
+						<th class="t_header text-center">Skill</th>
+						<th class="t_header text-center">Proficiency Level</th>
+						<th class="t_header text-center">Action</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th class="t_body text-center">1</th>
+						<td class="t_body text-center">Mark</td>
+						<td class="t_body text-center">Otto</td>
+						<td class="t_body text-center">
+							<button class="btn btn-info text-white" data-bs-toggle="modal"
+								data-bs-target="#skillModalUpdate">Update</button>
+						</td>
+
+					</tr>
+
+				</tbody>
+
+			</table>
+		</div>
+
+	</div>
+
+</section>
+</div>
+
+
+<!-- skill modal -->
+<div class="modal fade" id="skillModal" tabindex="-1" aria-labelledby="skillModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="skillModalLabel">Add Skill</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form method="POST" action="">
+					{% csrf_token %}
+
+					<div class="mb-4">
+						<label class="text-dark" for="skill_name">Skill Name</label>
+						<input id="skill_name" type="text" class="ha-input form-control" name="pub_title"
+							placeholder="Enter Publication Name" required />
+					</div>
+					<div class="mb-4">
+						<label class="text-dark" for="level">Proficiency Level</label>
+						<input id="level" type="number" class="ha-input form-control" name="pub_title"
+							placeholder="Enter Publication Name" required />
+					</div>
+
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-info text-white">Save</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end skill model -->
+
+<!-- skill modal  update-->
+<div class="modal fade" id="skillModalUpdate" tabindex="-1" aria-labelledby="skillModalUpdateLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="skillModalUpdateLabel">Add Skill</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form method="POST" action="">
+					{% csrf_token %}
+
+					<div class="mb-4">
+						<label class="text-dark" for="skill_name">Skill Name</label>
+						<input id="skill_name_update" type="text" class=" form-control" name="pub_title"
+							placeholder="Enter Skill" required />
+					</div>
+					<div class="mb-4">
+						<label class="text-dark" for="level">Proficiency Level</label>
+						<input id="level_update" type="number" class=" form-control" name="pub_title"
+							placeholder="Enter Proficiency Level" required />
+					</div>
+
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-info text-white">Save</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end skill model -->
+
+{% endblock %}
