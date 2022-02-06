@@ -14,18 +14,18 @@
 			<table class="view-table">
 				<tr>
 					<td class="text-light">Full Name:</td>
-					<th class="text-light">&nbsp;ashish dhakal</th>
+					<th class="text-light">&nbsp;{{object.name}}</th>
 				</tr>
 
 				<tr>
 					<td class="text-light">Email:</td>
-					<th class="text-white "> &nbsp; aa@aa.com</th>
+					<th class="text-white "> &nbsp; {{object.email}}</th>
 				</tr>
 			</table>
 		</div>
 		<div class="col-lg-3 profile-img mb-5">
 
-			<img src="{% static 'images/iot-world.svg' %}" class="img-fluid" alt="">
+			<img src="{{object.photo.url}}" class="img-fluid" alt="">
 
 		</div>
 	</div>
@@ -45,16 +45,61 @@
 					</tr>
 				</thead>
 				<tbody>
+					{% for item in object.skillset.all%}
 					<tr>
-						<th class="t_body text-center">1</th>
-						<td class="t_body text-center">Mark</td>
-						<td class="t_body text-center">Otto</td>
+						<th class="t_body text-center">{{forloop.counter}}</th>
+						<td class="t_body text-center">{{item.skill_name}}</td>
+						<td class="t_body text-center">{{item.proficiency_level}}</td>
 						<td class="t_body text-center">
 							<button class="btn btn-info text-white" data-bs-toggle="modal"
-								data-bs-target="#skillModalUpdate">Update</button>
+								data-bs-target="#skillModalUpdate-{{item.id}}">Update</button>
 						</td>
 
 					</tr>
+
+
+					<!-- skill modal  update-->
+					<div class="modal fade" id="skillModalUpdate-{{item.id}}" tabindex="-1"
+						aria-labelledby="skillModalUpdateLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="skillModalUpdateLabel">Add Skill</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<form method="POST" action="">
+										{% csrf_token %}
+
+										<div class="mb-4">
+											<label class="text-dark" for="skill_name">Skill Name</label>
+											<input id="skill_name_update" type="text" class=" form-control"
+												name="pub_title" placeholder="Enter Skill" required />
+										</div>
+										<div class="mb-4">
+											<label class="text-dark" for="level">Proficiency Level</label>
+											<input id="level_update" type="number" class=" form-control"
+												name="pub_title" placeholder="Enter Proficiency Level" required />
+										</div>
+
+										<button type="submit" class="btn btn-info text-white">Save</button>
+
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary "
+										data-bs-dismiss="modal">Close</button>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- end skill model -->
+
+
+
+					{% endfor %}
 
 				</tbody>
 
@@ -89,46 +134,12 @@
 						<input id="level" type="number" class="ha-input form-control" name="pub_title"
 							placeholder="Enter Publication Name" required />
 					</div>
-
+					<button type="button" class="btn btn-info text-white">Save</button>
 				</form>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-info text-white">Save</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- end skill model -->
 
-<!-- skill modal  update-->
-<div class="modal fade" id="skillModalUpdate" tabindex="-1" aria-labelledby="skillModalUpdateLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="skillModalUpdateLabel">Add Skill</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<form method="POST" action="">
-					{% csrf_token %}
-
-					<div class="mb-4">
-						<label class="text-dark" for="skill_name">Skill Name</label>
-						<input id="skill_name_update" type="text" class=" form-control" name="pub_title"
-							placeholder="Enter Skill" required />
-					</div>
-					<div class="mb-4">
-						<label class="text-dark" for="level">Proficiency Level</label>
-						<input id="level_update" type="number" class=" form-control" name="pub_title"
-							placeholder="Enter Proficiency Level" required />
-					</div>
-
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-info text-white">Save</button>
 			</div>
 		</div>
 	</div>
