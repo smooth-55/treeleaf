@@ -8,5 +8,5 @@ from treeleaf.views import (
 urlpatterns = [
     path("create", ProfileCreateView.as_view(), name="create"),
     path("", ProfileListView.as_view(), name="list"),
-    path("view", RetrieveProfileView.as_view(), name="view"),
+    path("view/<int:pk>", RetrieveProfileView.as_view(), name="view"),
 ]
