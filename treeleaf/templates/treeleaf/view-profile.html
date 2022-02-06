@@ -64,26 +64,33 @@
 						<div class="modal-dialog modal-dialog-centered">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h5 class="modal-title" id="skillModalUpdateLabel">Add Skill</h5>
+									<h5 class="modal-title" id="skillModalUpdateLabel">Update Skill</h5>
 									<button type="button" class="btn-close" data-bs-dismiss="modal"
 										aria-label="Close"></button>
 								</div>
 								<div class="modal-body">
-									<form method="POST" action="">
+									<form method="POST" id="addNewSkillForm" action="">
 										{% csrf_token %}
 
 										<div class="mb-4">
-											<label class="text-dark" for="skill_name">Skill Name</label>
+											<input id="store_object" type="text" class=" form-control"
+												name="store_object" placeholder="object" value="{{object.id}}" hidden />
+
+											<label class="text-dark" for="skill_name_update">Skill Name</label>
 											<input id="skill_name_update" type="text" class=" form-control"
-												name="pub_title" placeholder="Enter Skill" required />
+												name="skill_name_update" placeholder="Enter Skill"
+												value="{{item.skill_name}}" required />
+
 										</div>
 										<div class="mb-4">
 											<label class="text-dark" for="level">Proficiency Level</label>
 											<input id="level_update" type="number" class=" form-control"
-												name="pub_title" placeholder="Enter Proficiency Level" required />
+												name="level_update" placeholder="Enter Proficiency Level"
+												value="{{item.proficiency_level}}" required />
 										</div>
 
-										<button type="submit" class="btn btn-info text-white">Save</button>
+										<button type="submit" onclick="updateSkill({{item.id}})"
+											class="btn btn-info text-white">Save</button>
 
 									</form>
 								</div>
@@ -125,16 +132,17 @@
 					{% csrf_token %}
 
 					<div class="mb-4">
-						<label class="text-dark" for="skill_name">Skill Name</label>
-						<input id="skill_name" type="text" class="ha-input form-control" name="pub_title"
-							placeholder="Enter Publication Name" required />
+						<label class="text-dark" for="create_skill_name">Skill Name</label>
+						<input id="create_skill_name" type="text" class="ha-input form-control" name="skill_names"
+							placeholder="Enter Skill Name" required />
 					</div>
 					<div class="mb-4">
-						<label class="text-dark" for="level">Proficiency Level</label>
-						<input id="level" type="number" class="ha-input form-control" name="pub_title"
+						<label class="text-dark" for="create_level">Proficiency Level</label>
+						<input id="create_level" type="number" class="ha-input form-control" name="create_level"
 							placeholder="Enter Publication Name" required />
 					</div>
-					<button type="button" class="btn btn-info text-white">Save</button>
+					<button type="submit" onclick="addNewSkill({{object.id}})"
+						class="btn btn-info text-white">Save</button>
 				</form>
 			</div>
 			<div class="modal-footer">
@@ -146,4 +154,68 @@
 </div>
 <!-- end skill model -->
 
+{% endblock %}
+
+{% block script%}
+
+<script>
+	const addNewSkill = (id) => {
+
+
+		var object_id = id;
+		var url = '/skill/' + object_id
+		var redirect_url = '/view/' + object_id
+		var level = document.getElementById("create_level").value
+		var skill = document.getElementById("create_skill_name").value
+
+
+
+
+		$.ajax({
+			url: url,
+			data: {
+				'object_id': object_id,
+				"level": level,
+				"skill": skill
+			},
+			success: function (aa) {
+				window.location = redirect_url;
+
+
+			}
+
+		});
+
+	}
+</script>
+
+<script>
+	const updateSkill = (id) => {
+
+
+		var object_id = id;
+		var url = '/skill-update/' + object_id
+		var level = document.getElementById("level_update").value
+		var skill = document.getElementById("skill_name_update").value
+		var profile = document.getElementById("store_object").value
+
+		var redirect_url = '/view/' + profile
+
+		$.ajax({
+			url: url,
+			data: {
+				'skill_obj': object_id,
+				"proficiency_level": level,
+				"skill_name": skill
+			},
+			success: function (e) {
+				window.location = redirect_url;
+
+
+			}
+
+		});
+
+	}
+</script>
 {% endblock %}
