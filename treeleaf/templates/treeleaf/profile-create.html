@@ -65,7 +65,8 @@ Profile{%endblock%} {%block static%} {%endblock%} {% block content %}
 {% endblock %} {%block script%}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- Select2 -->
+
+<!-- ajax to create a profile and skillset from asynchronous call -->
 
 <script type="text/javascript">
     $(document).on('submit', '#createProfileForm', function (e) {
@@ -92,14 +93,9 @@ Profile{%endblock%} {%block static%} {%endblock%} {% block content %}
             },
 
             success: function () {
-                alert("data saved")
+
                 $('#createProfileForm')[0].reset();
-                // $('#succes-message').show();
-                // setTimeout(function () {
-                //     $(".alert").fadeTo(100, 0).slideUp(400, function () {
-                //         $(this).remove();
-                //     });
-                // }, 3000);
+
             }
         });
     });
