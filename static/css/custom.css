@@ -1,0 +1,63 @@
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	font-weight: 400;
+	line-height: 1.4;
+	font-size: 1em;
+}
+
+body {
+	background: rgb(10, 28, 21);
+	background: linear-gradient(
+		90deg,
+		rgba(10, 28, 21, 1) 0%,
+		rgba(17, 129, 66, 1) 77%,
+		rgba(27, 198, 96, 1) 100%
+	);
+}
+
+label {
+	color: aliceblue;
+}
+
+.t_header {
+	color: antiquewhite;
+}
+
+.t_body {
+	color: aliceblue;
+}
+
+.table-image {
+	width: 50px;
+	height: 60px;
+	overflow: hidden;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+	outline: none;
+}
+
+a:link:active,
+a:hover,
+a:visited:active {
+	color: white;
+}
+
+.btn-inline {
+	padding: 5px 12px;
+}
+
+.fa-plus {
+	margin-top: 35px;
+}
+
+.profile-img {
+	width: 150px;
+	height: 150px;
+}

@@ -1,0 +1,107 @@
+{% extends 'base.html' %} {% load static %} {%block title%}Create
+Profile{%endblock%} {%block static%} {%endblock%} {% block content %}
+
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-lg-7 my-5">
+            <h3 class="text-white">Fill the form to create your profile!</h3>
+
+            <p class="my-3 text-info text-capitalize">
+                Treeleaf Django Qualification Task
+            </p>
+
+            <form id="createProfileForm" action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label for="full_name" class="fs-5 mx-2">Full Name </label>
+                        <input type="text" class="form-control" id="full_name" name="full_name"
+                            placeholder="Enter Your Full Name" required />
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="email" class="fs-5 mx-2">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email"
+                            required />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label for="skill" class="fs-5 mx-2">Skill</label>
+
+                        <input type="text" class="form-control" id="skill" name="skill" placeholder="Enter Your Skill"
+                            required />
+                    </div>
+
+                    <div class="col-lg-6">
+                        <label for="level" class="fs-5 mx-2">Proficiency Level</label>
+                        <input type="number" class="form-control" id="level" name="level"
+                            placeholder="Enter Your Proficiency Level" required />
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label for="photo" class="fs-5 mx-2">Choose Image</label>
+                        <input type="file" class="form-control" id="photo" name="photo" accept="image/*" required />
+                    </div>
+
+                    <div class="col-lg-6">
+                        <label for="cv" class="fs-5 mx-2">Browse CV</label>
+                        <input type="file" class="form-control" id="cv" name="cv" accept=".pdf, .doc, .docx" required />
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-info w-100 text-white my-2">
+                    Apply
+                </button>
+            </form>
+        </div>
+        <div class="col-lg-4 offset-lg-1">
+            <img src="{% static 'images/iot-world.svg' %}" class="img-fluid" alt="" />
+        </div>
+    </div>
+</div>
+
+
+{% endblock %} {%block script%}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- ajax to create a profile and skillset from asynchronous call -->
+
+<script type="text/javascript">
+    $(document).on('submit', '#createProfileForm', function (e) {
+        e.preventDefault();
+
+        var data = new FormData();
+
+        data.append("photo", $("input[id^='photo'")[0].files[0]);
+        data.append("cv", $("input[id^='cv'")[0].files[0]);
+        data.append("csrfmiddlewaretoken": "{{csrf_token}}");
+        $.ajax({
+            type: 'POST',
+            url: '{% url 'create' %}',
+            mimeType: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+
+            data: data += {
+                full_name: $('#full_name').val(),
+                email: $('#email').val(),
+                skill: $('#skill').val(),
+                level: $('#level').val(),
+
+            },
+
+            success: function () {
+
+                $('#createProfileForm')[0].reset();
+
+            }
+        });
+    });
+
+</script>
+
+
+
+{% endblock %}
